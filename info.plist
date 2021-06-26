@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>nl.thomasvanzadelhoff.airpods</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>8B85D2D1-76CB-4F01-8EC8-130792F1B421</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>906411C4-C042-4EE7-A78E-884EE1173373</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>ED460094-13F1-441D-990E-ED0889BAE9C2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8B85D2D1-76CB-4F01-8EC8-130792F1B421</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Thomas van Zadelhoff</string>
+	<key>description</key>
+	<string>Change your AirPods Pro listening mode using the 'air' command.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>AirPods</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>use framework "IOBluetooth"use scripting additions
+
+on alfred_script(q)
+repeat with device in (current application's IOBluetoothDevice's pairedDevices() as list)	if device's isConnected and (device's nameOrAddress as string) contains "AirPods Pro" then				set OFF to 1		set ANC to 2		set TRANSPARENCY to 3				if device's listeningMode as integer is equal to OFF or device's listeningMode as integer is equal to ANC then			set device's listeningMode to TRANSPARENCY			return "AirPods Pro listening mode has been set to: Transparency mode."		else			set device's listeningMode to ANC			return "AirPods Pro listening mode has been set to: Noise Cancellation."		end if	end ifend repeatreturn "Your AirPods Pro are not connected to this Mac."
+end alfred_script</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>8B85D2D1-76CB-4F01-8EC8-130792F1B421</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>air</string>
+				<key>subtext</key>
+				<string>Toggles the AirPods Pro listening mode.</string>
+				<key>text</key>
+				<string>AirPods</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>ED460094-13F1-441D-990E-ED0889BAE9C2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>AirPods</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>906411C4-C042-4EE7-A78E-884EE1173373</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Use Alfred to change your Airpods Pro's listening mode.</string>
+	<key>uidata</key>
+	<dict>
+		<key>8B85D2D1-76CB-4F01-8EC8-130792F1B421</key>
+		<dict>
+			<key>xpos</key>
+			<integer>505</integer>
+			<key>ypos</key>
+			<integer>290</integer>
+		</dict>
+		<key>906411C4-C042-4EE7-A78E-884EE1173373</key>
+		<dict>
+			<key>xpos</key>
+			<integer>735</integer>
+			<key>ypos</key>
+			<integer>290</integer>
+		</dict>
+		<key>ED460094-13F1-441D-990E-ED0889BAE9C2</key>
+		<dict>
+			<key>xpos</key>
+			<integer>280</integer>
+			<key>ypos</key>
+			<integer>290</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>thomasvanzadelhoff.nl</string>
+</dict>
+</plist>
